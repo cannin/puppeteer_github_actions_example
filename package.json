@@ -1,0 +1,17 @@
+{
+  "name": "puppeteer-github-action-example",
+  "version": "0.0.1",
+  "description": "Downloads a URL; evaluates some Javascript",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "cannin",
+  "license": "MIT",
+  "devDependencies": {},
+  "dependencies": {
+    "puppeteer-core": "^13.6.0"
+  }
+}
