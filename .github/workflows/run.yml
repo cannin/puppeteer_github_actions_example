@@ -34,7 +34,7 @@ jobs:
         node-version: 16
         cache: 'npm'
     - name: Run
-      run: npm ci; npm run start; mkdir _site; mv result.json _site; ls -lR
+      run: npm ci; npm run start; ls -lR
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v1
 

@@ -1,7 +1,13 @@
 import puppeteer from 'puppeteer-core'
 import { type } from 'os'
-import { normalize } from 'path'
-import * as fs from 'fs'
+import { fileURLToPath } from 'url'
+import { join, normalize, dirname } from 'path'
+import { existsSync, writeFileSync, mkdirSync } from 'fs'
+
+// Get current working directory
+// From: https://stackoverflow.com/a/62892482
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 if (!process.env.GITHUB_ACTIONS) {
   console.log('Running locally')
@@ -25,12 +31,19 @@ function getChromePath() {
 }
 
 try {
+  const outputDir = join(__dirname, '_site')
+
+  if (!existsSync(outputDir)) {
+    console.log(`Creating '${outputDir}'.`)
+    mkdirSync(outputDir)
+  }
+
   const url = 'https://www.cnn.com/markets/fear-and-greed'
 
   const width = 1920
   const height = 1080
 
-  const date = ((new Date()).toISOString()).replaceAll(':', '-').replaceAll('.', '-')
+  const date = ((new Date()).toISOString()).substring(0, 10)
 
   console.log(`\nLaunching at ${date} using ${width}x${height}.`)
 
@@ -55,7 +68,7 @@ try {
   console.log('Data: ' + JSON.stringify(dat) + '\n')
 
   console.log('Write to file...\n')
-  await fs.writeFileSync("result.json", JSON.stringify(dat))
+  await writeFileSync(join(outputDir, 'result.json'), JSON.stringify(dat))
 
   console.log('Closing Browser...\n')
   await browser.close()
