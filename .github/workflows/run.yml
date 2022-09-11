@@ -1,10 +1,24 @@
 name: run
 
 on:
+  # Runs on pushes targeting the default branch
   push:
     branches: [ "main" ]
   schedule:
     - cron:  '45 7 * * *'
+  # Allows running workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
   # Build
@@ -20,7 +34,7 @@ jobs:
         node-version: 16
         cache: 'npm'
     - name: Run
-      run: npm ci; npm run start; ls -lah
+      run: npm ci; npm run start; mkdir _site; mv result.json _site; ls -lR
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v1
 
