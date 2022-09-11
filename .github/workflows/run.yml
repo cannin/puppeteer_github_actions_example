@@ -1,10 +1,10 @@
-name: Run
+name: run
 
 on:
   push:
     branches: [ "main" ]
   schedule:
-    - cron:  '0 10 * 1-4,9-12 6'
+    - cron:  '45 7 * * *'
 
 jobs:
   build:
@@ -16,5 +16,10 @@ jobs:
       with:
         node-version: 16
         cache: 'npm'
-    - run: npm install; npm run start
-
+    - name: Run
+      run: npm install; npm run start
+    - name: Deploy
+      uses: JamesIves/github-pages-deploy-action@4.1.4
+      with:
+        branch: gh-pages
+        folder: .
