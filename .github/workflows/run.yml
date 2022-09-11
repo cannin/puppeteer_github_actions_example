@@ -17,7 +17,7 @@ jobs:
         node-version: 16
         cache: 'npm'
     - name: Run
-      run: npm install; npm run start
+      run: npm install; npm run start; ls -lah
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@4.1.4
       with:
