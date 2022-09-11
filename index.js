@@ -3,7 +3,6 @@ import { type } from 'os'
 import { normalize } from 'path'
 import * as fs from 'fs'
 
-
 if (!process.env.GITHUB_ACTIONS) {
   console.log('Running locally')
 }
