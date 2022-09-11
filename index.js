@@ -14,8 +14,7 @@ function getChromePath() {
   if (type() === 'Linux') {
     browserPath = '/usr/bin/google-chrome'
   } else if (type() === 'Darwin') {
-    browserPath =
-        '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+    browserPath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
   }
 
   if (browserPath && browserPath.length > 0) {
