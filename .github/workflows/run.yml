@@ -7,6 +7,7 @@ on:
     - cron:  '45 7 * * *'
 
 jobs:
+  # Build
   build:
     runs-on: ubuntu-20.04
     permissions:
@@ -19,9 +20,18 @@ jobs:
         node-version: 16
         cache: 'npm'
     - name: Run
-      run: npm install; npm run start; ls -lah
-    - name: Deploy
-      uses: JamesIves/github-pages-deploy-action@4.1.4
-      with:
-        branch: gh-pages
-        folder: .
+      run: npm ci; npm run start; ls -lah
+        - name: Upload artifact
+          uses: actions/upload-pages-artifact@v1
+
+  # Deploy
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-20.04
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1

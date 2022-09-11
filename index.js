@@ -35,7 +35,7 @@ try {
   console.log(`\nLaunching at ${date} using ${width}x${height}.`)
 
   const browser = await puppeteer.launch({
-    ...(process.env.ACT && { args: ['--no-sandbox', '--disable-setuid-sandbox'] }), // ? For local testing purposes (nektos/act)
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
     executablePath: getChromePath(),
     defaultViewport: { width, height }
     // headless: false,
