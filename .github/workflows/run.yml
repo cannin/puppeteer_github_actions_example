@@ -34,7 +34,7 @@ jobs:
         node-version: 16
         cache: 'npm'
     - name: Run
-      run: npm ci; npm run start; echo "CUR DIR:\n"; ls; echo "\n_site DIR:\n"; ls _site
+      run: npm ci; npm run start; echo "CUR DIR:"; ls; echo "_site DIR:"; ls _site
     - name: Upload artifact
       uses: actions/upload-pages-artifact@v1
 
