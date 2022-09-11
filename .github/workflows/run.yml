@@ -21,8 +21,8 @@ jobs:
         cache: 'npm'
     - name: Run
       run: npm ci; npm run start; ls -lah
-        - name: Upload artifact
-          uses: actions/upload-pages-artifact@v1
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v1
 
   # Deploy
   deploy:
